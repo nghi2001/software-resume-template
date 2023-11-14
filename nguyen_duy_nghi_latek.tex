@@ -1,0 +1,316 @@
+%-------------------------------------
+% LaTeX Resume for Software Engineers
+% Author : Leslie Cheng
+% License : MIT
+%-------------------------------------
+
+\documentclass[letterpaper,12pt]{article}[leftmargin=*]
+
+\usepackage[empty]{fullpage}
+\usepackage{enumitem}
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage{fontspec}
+  \usepackage[xetex]{hyperref}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[pdftex]{hyperref}
+\fi
+\usepackage{fontawesome}
+\usepackage[sfdefault,light]{FiraSans}
+\usepackage{anyfontsize}
+\usepackage{xcolor}
+\usepackage{tabularx}
+
+%-------------------------------------------------- SETTINGS HERE --------------------------------------------------
+% Header settings
+\def \fullname {Nguyen Duy Nghi}
+\def \subtitle {}
+
+% \def \linkedinicon {\faLinkedin}
+% \def \linkedinlink {https://linkedin.com/in/dwight-schrute/}
+% \def \linkedintext {/dwight-schrute}
+
+\def \phoneicon {\faPhone}
+\def \phonetext {0799232407}
+
+\def \emailicon {\faEnvelope}
+\def \emaillink {mailto:nguyenduynghi2001@gmail.com}
+\def \emailtext {nguyenduynghi2001@gmail.com}
+
+\def \githubicon {\faGithub}
+\def \githublink {https://github.com/nghi2001}
+\def \githubtext {nghi2001}
+
+\def \websiteicon {\faMapMarker}
+% \def \websitelink {https://google.com/}
+\def \websitetext {Ho Chi Minh, Viet Nam}
+
+\def \headertype {\singlecol} % \singlecol or \doublecol
+
+% Misc settings
+\def \entryspacing {-0pt}
+
+\def \bulletstyle {\faAngleRight}
+
+% Define colours
+\definecolor{primary}{HTML}{000000}
+\definecolor{secondary}{HTML}{0D47A1}
+\definecolor{accent}{HTML}{263238}
+\definecolor{links}{HTML}{1565C0}
+
+%------------------------------------------------------------------------------------------------------------------- 
+
+% Defines to make listing easier
+\def \linkedin {\linkedinicon \hspace{3pt}\href{\linkedinlink}{\linkedintext}}
+\def \phone {\phoneicon \hspace{3pt}{ \phonetext}}
+\def \email {\emailicon \hspace{3pt}\href{\emaillink}{\emailtext}}
+\def \github {\githubicon \hspace{3pt}\href{\githublink}{\githubtext}}
+\def \website {\websiteicon \hspace{3pt}\href{\websitelink}{\websitetext}}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.1in}
+
+% Define the link colours
+\hypersetup{
+    colorlinks=true,
+    urlcolor=links,
+}
+
+% Set the margin alignment 
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+%-------------------------
+% Custom commands
+
+% Sections
+\renewcommand{\section}[2]{\vspace{5pt}
+  \colorbox{secondary}{\color{white}\raggedbottom\normalsize\textbf{{#1}{\hspace{7pt}#2}}}
+}
+
+% Entry start and end, for spacing
+\newcommand{\resumeEntryStart}{\begin{itemize}[leftmargin=2.5mm]}
+\newcommand{\resumeEntryEnd}{\end{itemize}\vspace{\entryspacing}}
+
+% Itemized list for the bullet points under an entry, if necessary
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=4.5mm]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% Resume item
+\renewcommand{\labelitemii}{\bulletstyle}
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+% Entry with title, subheading, date(s), and location
+\newcommand{\resumeEntryTSDL}[4]{
+  \vspace{-1pt}\item[]
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
+      \textbf{\color{primary}#1} & {\firabook\color{accent}\small#2} \\
+      \textit{\color{accent}\small#3} & \textit{\color{accent}\small#4} \\
+    \end{tabularx}\vspace{-6pt}
+}
+
+% Entry with title and date(s)
+\newcommand{\resumeEntryTD}[2]{
+  \vspace{-1pt}\item[]
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}
+      \textbf{\color{primary}#1} & {\firabook\color{accent}\small#2} \\
+    \end{tabularx}\vspace{-6pt}
+}
+
+% Entry for special (skills)
+\newcommand{\resumeEntryS}[2]{
+  \item[]\small{
+    \textbf{\color{primary}#1 }{ #2 \vspace{-6pt}}
+  }
+}
+
+% Double column header
+\newcommand{\doublecol}[6]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[c]{l}
+        \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        {\textit{\subtitle}} % You could add a subtitle here
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l@{\hspace{1.5em}}l}
+        {\small#4} & {\small#1} \\
+        {\small#5} & {\small#2} \\
+        {\small#6} & {\small#3}
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+% Single column header
+\newcommand{\singlecol}[6]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[b]{l}
+        \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        {\textit{\subtitle}} % You could add a subtitle here
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l}
+        {\small#1} \\
+        {\small#2} \\
+        {\small#3} \\
+        {\small#4} \\
+        {\small#5} \\
+        {\small#6}
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+\begin{document}
+%-------------------------------------------------- BEGIN HERE --------------------------------------------------
+
+%---------------------------------------------------- HEADER ----------------------------------------------------
+
+\headertype{\website}{\phone}{\github}{\email}{\linkedin}{} % Set the order of items here
+\vspace{-10pt} % Set a negative value to push the body up, and the opposite
+%-------------------------------------------------- OBJECTIVE --------------------------------------------------
+\section{\faLightbulb}{Objective}
+
+
+\resumeEntryStart
+    \resumeItemListStart
+        \resumeItem{Experienced Backend Developer with 1.5 years of expertise in Node.js frameworks (KOA.JS, Express.JS, Nest.JS) and PHP framework Laravel. Well-versed in designing and implementing scalable solutions.}
+        \resumeItem{Proficient in DevOps practices, including CI/CD, Kubernetes, and AWS Cloud. Seeking a challenging role to apply my technical skills, contribute to innovative projects, and grow within a dynamic development team.}
+    \resumeEntryEnd
+
+
+\resumeEntryEnd
+
+
+%-------------------------------------------------- PROGRAMMING SKILLS --------------------------------------------------
+\section{\faGears}{Skills}
+ \resumeEntryStart
+  \resumeEntryS{Programming Languages } {PHP, Javascript, Typescript}
+  \resumeEntryS{Library } {ReactJS, Socket.IO, RabbitMQ}
+  \resumeEntryS{Framework} {Koa.JS, Express.JS, Nest.JS, Laravel}
+  \resumeEntryS{Database} {Postgres, Mongodb}
+  \resumeEntryS{Caching} {Redis}
+  \resumeEntryS{CI/CD Tools} {Jenkins}
+  \resumeEntryS{Front end} {HTML5, CSS3}
+  \resumeEntryS{Cloud Platform} {AWS}
+  \resumeEntryS{Other} {Docker, Git, Postman, Linux Ubuntu}
+ \resumeEntryEnd
+
+
+%-------------------------------------------------- EXPERIENCE --------------------------------------------------
+\section{\faPieChart}{Experience}
+
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {Estuary Solution}{May 2022 -- September 2023}
+      {Backend Developer}{}
+    \resumeItemListStart
+      \resumeItem {Write clean, maintainable, and scalable code using the KOA.JS framework.}
+      \resumeItem {Work closely with the Front-end team and CS team to discuss and implement new features.}
+      \resumeItem {Maintain the source code of existing products, supporting upgrades, and addressing operational issues that may arise during the course of operations.}
+      \resumeItem{Provide operational support to members of other teams, assisting in testing, debugging, and releasing new features.}
+      \resumeItem{Stay abreast of industry trends and technologies, and actively participate in researching and integrating third-party services to enhance our products.}
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+%-------------------------------------------------- PROJECTS --------------------------------------------------
+\section{\faFlask}{Projects}
+
+  \resumeEntryStart
+    \resumeEntryTD
+      {Thien Ca Phe}{}
+
+        \textbf{\\Description: }
+        
+            \resumeItemListStart
+              \resumeItem {The application facilitates users in learning and practicing meditation while also offering a curated selection of products related to meditation for user.}
+            \resumeItemListEnd
+
+
+        \textbf{Team size: }8
+
+  
+        \textbf{Responsibility: }
+            \resumeItemListStart
+                \resumeItem{Develop and implement new features for the application, ensuring a seamless user experience.}
+                \resumeItem{Address and resolve bugs promptly to maintain the application's performance and reliability.}
+                \resumeItem{Manage the Payment service, overseeing transactions and ensuring a secure and efficient payment process.}
+                \resumeItem{Handle real-time events, optimizing the application's responsiveness and interactivity, and implement scalable horizontal socket server solutions.}
+                \resumeItem{Operate, maintain, and update version code across development, staging, and production environments.}
+                \resumeItem{Collaborate with cross-functional teams to gather requirements and implement solutions that align with business objectives.}
+                \resumeItem{Implement best practices for code quality, performance, and security.}
+            \resumeItemListEnd
+  \resumeEntryEnd
+
+
+    \resumeEntryStart
+    \resumeEntryTD
+      {Vemedim}{}
+
+        \textbf{\\Description: }
+        
+            \resumeItemListStart
+              \resumeItem {This project involves the development of an ERP system designed to support sales and marketing teams. Key features include sales management, daily work management, product management, order management, and customer management. The aim is to streamline and enhance various aspects of sales and marketing operations through a comprehensive and integrated platform.}
+            \resumeItemListEnd
+
+
+        \textbf{Team size: }6
+
+        
+        \textbf{Responsibility: }
+            \resumeItemListStart
+                \resumeItem{Resolved bugs and ensured the smooth functioning of the system through ongoing maintenance.}
+                \resumeItem{Contributed to the development of new features, enhancing the system's capabilities.}
+                \resumeItem{Collaborated with the team to identify and address bugs, maintaining high-quality standards.}
+                \resumeItem{Played a vital role in creating innovative features for the system's improvement.}
+            \resumeItemListEnd
+  \resumeEntryEnd
+
+  \resumeEntryStart
+    \resumeEntryTD
+      { FiveStar Fashion Ecommerce}{}
+
+        \textbf{\\Description: }
+        
+            \resumeItemListStart
+              \resumeItem {This web application is a specialized e-commerce platform focusing on fashion, offering a curated selection of stylish products for purchase}
+            \resumeItemListEnd
+
+
+        \textbf{Team size: }5
+
+        
+        \textbf{Responsibility: }
+            \resumeItemListStart
+                \resumeItem{Main backend developer responsible for creating new features, ensuring comprehensive API design, and overseeing implementation.}
+                \resumeItem{Designed and optimized databases to support efficient data management and retrieval.}
+                \resumeItem{Identified and resolved bugs through systematic debugging and troubleshooting processes.}
+                \resumeItem{Undertook the responsibility of maintaining system health, ensuring smooth and reliable functionality.}
+                \resumeItem{Executed deployment procedures, managing the seamless transition of updates and improvements to server environments.}
+            \resumeItemListEnd
+  \resumeEntryEnd
+
+%-------------------------------------------------- EDUCATION --------------------------------------------------
+\section{\faGraduationCap}{Education}
+
+  \resumeEntryStart
+    \resumeEntryTSDL
+      {FPT Polytechnic}{09/2020 -- 01/2023}
+      {Information Technology}{GPA: 8.0/10}
+  \resumeEntryEnd
+
+
+\end{document}
